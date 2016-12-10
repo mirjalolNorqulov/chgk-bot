@@ -5,7 +5,8 @@
 
 # 
 import os
-from bot import bot
+
+import bot
 import telebot
 from flask import Flask, request
 from telebot import types
@@ -23,7 +24,7 @@ def webhook():
     if request.headers.get('content-type') == 'application/json':
         json_string = request.get_data().encode('utf-8')
         update = telebot.types.Update.de_json(json_string)
-        bot.process_new_messages([update.message])
+        bot.bot.process_new_messages([update.message])
         return ''
     else:
         flask.abort(403)
