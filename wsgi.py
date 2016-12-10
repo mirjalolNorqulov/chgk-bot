@@ -5,35 +5,31 @@
 
 # 
 import os
-import bot
+from bot import bot
 import telebot
 from flask import Flask, request
 from telebot import types
 
 
-application = Flask(__name__, instance_path=os.environ['OPENSHIFT_REPO_DIR'])
-update_queue, bot_instance = bot.setup(webhook_url='https://{}/{}'.format(
-    os.environ['OPENSHIFT_GEAR_DNS'],
-    bot.TOKEN
-))
+application = Flask(__name__)
 
-
-@application.route('/')
-def not_found():
-    """Server won't respond in OpenShift if we don't handle the root path."""
+# Empty webserver index, return nothing, just http 200
+@application.route('/', methods=['GET', 'HEAD'])
+def index():
     return ''
-
 
 @application.route('/' + bot.TOKEN, methods=['GET', 'POST'])
 def webhook():
-    if request.json:
-        #update_queue.put(Update.de_json(request.json, bot_instance))
-        update = telebot.types.Update.de_json(request.json)
-        bot.bot.process_new_messages([update.message])
-    return ''
+    if request.headers.get('content-type') == 'application/json':
+        json_string = request.get_data().encode('utf-8')
+        update = telebot.types.Update.de_json(json_string)
+        bot.process_new_messages([update.message])
+        return ''
+    else:
+        flask.abort(403)
 
 
 if __name__ == '__main__':
-    ip = os.environ['OPENSHIFT_PYTHON_IP']
-    port = int(os.environ['OPENSHIFT_PYTHON_PORT'])
-    application.run(host=ip, port=port)
+    application.run(host='http://mybot-m-pro.44fs.preview.openshiftapps.com/',
+        port=8443,
+        debug=True)
