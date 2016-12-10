@@ -4,14 +4,14 @@
 #
 
 # 
-'''import os
+import os
 import bot
 import telebot
 from flask import Flask, request
 from telebot import types
 
 
-application = Flask(__name__, instance_path=os.environ['OPENSHIFT_PYTHON_DIR'])
+application = Flask(__name__, instance_path=os.environ['OPENSHIFT_REPO_DIR'])
 update_queue, bot_instance = bot.setup(webhook_url='https://{}/{}'.format(
     os.environ['OPENSHIFT_GEAR_DNS'],
     bot.TOKEN
@@ -37,11 +37,3 @@ if __name__ == '__main__':
     ip = os.environ['OPENSHIFT_PYTHON_IP']
     port = int(os.environ['OPENSHIFT_PYTHON_PORT'])
     application.run(host=ip, port=port)
-'''
-
-
-from bot import bot
-
-if __name__ == '__main__':
-    bot.polling(none_stop = True)
-
