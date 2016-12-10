@@ -34,3 +34,4 @@ if __name__ == '__main__':
     application.run(host='http://mybot-m-pro.44fs.preview.openshiftapps.com/',
         port=8443,
         debug=True)
+    bot.bot.polling(none_stop = True)
