@@ -17,7 +17,7 @@ application = Flask(__name__)
 # Empty webserver index, return nothing, just http 200
 @application.route('/', methods=['GET', 'HEAD'])
 def index():
-    return ''
+    return '<h1>HELLO</h1>'
 
 @application.route('/' + bot.TOKEN, methods=['GET', 'POST'])
 def webhook():
@@ -31,7 +31,9 @@ def webhook():
 
 
 if __name__ == '__main__':
+    bot.bot.polling(none_stop = True)
+
     application.run(host='http://mybot-m-pro.44fs.preview.openshiftapps.com/',
         port=8443,
         debug=True)
-    bot.bot.polling(none_stop = True)
+    
