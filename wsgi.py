@@ -4,7 +4,7 @@
 #
 
 # 
-'''import os
+import os
 import bot
 import telebot
 from flask import Flask, request
@@ -37,14 +37,3 @@ if __name__ == '__main__':
     ip = os.environ['OPENSHIFT_PYTHON_IP']
     port = int(os.environ['OPENSHIFT_PYTHON_PORT'])
     application.run(host=ip, port=port)
-'''
-
-from flask import Flask
-application = Flask(__name__)
-
-@application.route("/")
-def hello():
-    return "<h1>Hello World!</h1>"
-
-if __name__ == "__main__":
-    application.run()
