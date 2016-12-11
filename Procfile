@@ -1,1 +1,1 @@
-web: gunicorn wsgi:server ${PORT} --log-file=-
+web: gunicorn wsgi:server ${PORT}
