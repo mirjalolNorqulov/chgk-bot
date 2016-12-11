@@ -6,9 +6,12 @@
 # 
 import telebot
 import os
+
+from bot import bot
+
 from flask import Flask, request
 
-bot = telebot.TeleBot('237816678:AAEg8NJtmsUCUuyg7nFokTYVt1w5vN4EW8M')
+
 
 server = Flask(__name__)
 
