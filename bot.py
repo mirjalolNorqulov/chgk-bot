@@ -49,19 +49,19 @@ def give_question(message):
 	markup = types.ReplyKeyboardMarkup(row_width = 2)	
 	markup.add(button, answer_button)
 	answer = question['answer']
-	msg = bot.send_message(message.chat.id, text = text, reply_markup = markup)
-	bot.register_next_step_handler(msg, lambda m: answer_question(m, answer))
+	question_msg = bot.send_message(message.chat.id, text = text, reply_markup = markup)
+	bot.register_next_step_handler(question_msg, lambda m: answer_question(m, answer, question_msg))
 
 '''@bot.message_handler(func = lambda message:message.text == ("{0} Javob".format(key)).decode('utf-8'))
 def answer_question(message):
 	bot.send_message(message.chat.id, text = answer)
 '''
 
-def answer_question(message, answer):
+def answer_question(message, answer, question_msg):
 	if message.text == ("{0} Javob".format(key)).decode('utf-8') or message.text == '/javob' or message.text == '/javob@norqulov_bot':
-		bot.send_message(message.chat.id, text = answer)
+		bot.reply_to(question_msg, text = answer)
 	else:
-		bot.register_next_step_handler(message, lambda m: answer_question(m, answer))
+		bot.register_next_step_handler(message, lambda m: answer_question(m, answer, question_msg))
 	
 	
 
