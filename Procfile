@@ -1,1 +1,1 @@
-web: gunicorn wsgi:server ${PORT}
+web: gunicorn wsgi:server $PORT
