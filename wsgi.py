@@ -31,6 +31,6 @@ def webhook():
     #bot.set_webhook(url="https://py-awesome.herokuapp.com/bot")
     return "Hello heroku"
 
-server.run(host="0.0.0.0", port=os.environ.get('PORT', 5000))
-server = Flask(__name__)
+#server.run(host="0.0.0.0", port=os.environ.get('PORT', 5000))
+#server = Flask(__name__)
    
